@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+
+    
+    [SerializeField] bool isFacingRight = true;
+    
     
     Rigidbody2D rb;
     Vector2 input;
@@ -21,18 +25,40 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        
+
+        if (!isFacingRight && input.x > 0)
+        {
+            FlipSprite();
+        }
+        else if (isFacingRight && input.x < 0)
+        {
+            FlipSprite();
+        }
     }
 
     
     void MovePlayer()
     {
-        rb.linearVelocity = new Vector2(input.x * moveSpeed, input.y * moveSpeed);
+        rb.linearVelocity = input * moveSpeed;
+
+        
     }
     
     
+    
+    void FlipSprite()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
+    }
+
+
     public void Move(InputAction.CallbackContext context)
     {
-        input = new Vector2(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y);
+        input = context.ReadValue<Vector2>();
     }
 
 
