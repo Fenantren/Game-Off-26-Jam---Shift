@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [SerializeField] int damage = 1;
     [SerializeField] float bulletSpeed = 25f;
     Rigidbody2D rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,5 +20,13 @@ public class BulletScript : MonoBehaviour
        
             Destroy(gameObject);
         }
+
+        EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
+        Collider2D colliderHit = collision.GetComponent<Collider2D>();
+
+        enemyHealth?.TakeDamage(damage);
+        Destroy(gameObject);
+        //add SFX and VFX for a hit
+        
     }
 }
