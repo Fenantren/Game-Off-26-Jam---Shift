@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
 
     
-    [SerializeField] bool isFacingRight = true;
+    
     
     
     Rigidbody2D rb;
@@ -27,14 +27,7 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
         
 
-        if (!isFacingRight && input.x > 0)
-        {
-            FlipSprite();
-        }
-        else if (isFacingRight && input.x < 0)
-        {
-            FlipSprite();
-        }
+       
     }
 
     
@@ -47,13 +40,7 @@ public class PlayerController : MonoBehaviour
     
     
     
-    void FlipSprite()
-    {
-        isFacingRight = !isFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
-    }
+    
 
 
     public void Move(InputAction.CallbackContext context)
