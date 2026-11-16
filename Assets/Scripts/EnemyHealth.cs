@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class EnemyHealth : MonoBehaviour
@@ -9,7 +10,8 @@ public class EnemyHealth : MonoBehaviour
     
     [SerializeField] Transform heartBar;
     [SerializeField] GameObject heartUI;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    
 
     private void Awake()
     {
@@ -18,10 +20,14 @@ public class EnemyHealth : MonoBehaviour
         {
             Instantiate(heartUI, heartBar.position, heartBar.rotation, heartBar);
         }
-        
 
+        
     }
-   
+
+    private void Update()
+    {
+       
+    }
 
     public void TakeDamage (int damage)
     {
@@ -36,4 +42,6 @@ public class EnemyHealth : MonoBehaviour
 
         }
     }
+
+
 }
