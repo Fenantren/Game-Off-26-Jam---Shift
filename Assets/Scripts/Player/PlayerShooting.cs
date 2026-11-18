@@ -28,10 +28,7 @@ public class PlayerShooting : MonoBehaviour
     public void Shoot(InputAction.CallbackContext context)
     {
         mShooting = context.ReadValueAsButton();
-        Debug.Log(context.phase);
-
-
-
+       
     }
 
     void Fire()

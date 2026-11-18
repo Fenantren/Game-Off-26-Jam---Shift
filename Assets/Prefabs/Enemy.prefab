@@ -93,6 +93,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   moveSpeed: 5
+  castRadius: 0.2
+  lookAhead: 1.3
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!70 &3670447643133403914
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
