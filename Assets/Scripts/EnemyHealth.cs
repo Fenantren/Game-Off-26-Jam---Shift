@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Health Variables")]
     [SerializeField] int healthPoints = 3;
-    [SerializeField] float currentHP;
+    [SerializeField] int currentHP;
     
     [SerializeField] Transform heartBar;
     [SerializeField] GameObject heartUI;

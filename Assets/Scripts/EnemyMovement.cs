@@ -4,6 +4,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] int damage = 1;
+
     [SerializeField] float castRadius = 0.3f;
     [SerializeField] float lookAhead = 1.5f;
     [SerializeField] LayerMask obstacleMask;
@@ -11,11 +13,13 @@ public class EnemyMovement : MonoBehaviour
     float detourSide = 0f;
     Rigidbody2D rb;
     PlayerController player;
+    PlayerHealth playerHealth;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();   
         player = FindFirstObjectByType<PlayerController>(); 
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
 
@@ -23,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            playerHealth.TakeDamage(damage);
             Debug.Log("Player HIT");
         }
     }
