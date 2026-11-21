@@ -15,16 +15,11 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wall"))
+        if(collision.TryGetComponent<IDamageable>(out var target))
         {
-       
-            Destroy(gameObject);
+            target.TakeDamage(damage);
         }
 
-        EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
-        Collider2D colliderHit = collision.GetComponent<Collider2D>();
-
-        enemyHealth?.TakeDamage(damage);
         Destroy(gameObject);
         //add SFX and VFX for a hit
         

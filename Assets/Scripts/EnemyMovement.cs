@@ -13,25 +13,27 @@ public class EnemyMovement : MonoBehaviour
     float detourSide = 0f;
     Rigidbody2D rb;
     PlayerController player;
-    PlayerHealth playerHealth;
+    
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();   
         player = FindFirstObjectByType<PlayerController>(); 
-        playerHealth = player.GetComponent<PlayerHealth>();
+        
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
-            playerHealth.TakeDamage(damage);
-            Debug.Log("Player HIT");
+            if (collision.collider.TryGetComponent<IDamageable>(out var target))
+            {
+                target.TakeDamage(damage);
+                Debug.Log("Player HIT"); 
+            }
         }
     }
-
     private void FixedUpdate()
     {
         LookForPlayer();

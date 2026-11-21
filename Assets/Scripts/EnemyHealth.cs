@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 
-public class EnemyHealth : MonoBehaviour
+
+public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [Header("Health Variables")]
     [SerializeField] int healthPoints = 3;
