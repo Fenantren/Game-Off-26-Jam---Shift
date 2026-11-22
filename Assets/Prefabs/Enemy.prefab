@@ -80,6 +80,9 @@ MonoBehaviour:
   currentHP: 0
   heartBar: {fileID: 3952642177168350252}
   heartUI: {fileID: 8923725687096727672, guid: 16a40c5ec7cd3b04598fa89ea43998ee, type: 3}
+  isDead: 0
+  explosionVFX: {fileID: 5143333957815489378, guid: 0659a4a862dbb5b4780f8aec7ddcf869, type: 3}
+  moneyPrefab: {fileID: 253357358576956917, guid: 9cbcf7212884e3d49898ead736bf4bab, type: 3}
 --- !u!114 &3821310858746310472
 MonoBehaviour:
   m_ObjectHideFlags: 0
