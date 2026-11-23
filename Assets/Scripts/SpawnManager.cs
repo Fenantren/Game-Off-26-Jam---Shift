@@ -1,21 +1,26 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] Transform[] spawnTransform;
 
-    [SerializeField] int spawnCount = 3;
+    [SerializeField] private List<WaveData> waves;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private DayManager dayManager;
 
-    private void Start()
+
+
+    private int CalculateTotalEnemies()
     {
-        // Safety check to prevent DivideByZeroException if the array is empty
-        if (spawnTransform == null || spawnTransform.Length == 0) return;
-
-        for (int i = 0;  i < spawnCount; i++)
+        int totalEnemies = 0 ;
+        foreach(WaveData wave in waves)
         {
-            int spawnIndex = i % spawnTransform.Length;
-            Instantiate(enemyPrefab, spawnTransform[spawnIndex].position, spawnTransform[spawnIndex].rotation);
+            
+            int enemyCount = wave.enemyCount;
+            totalEnemies += enemyCount;
         }
+
+        return totalEnemies;
     }
 }
