@@ -16,7 +16,8 @@ public class DayManager : MonoBehaviour
     public event Action OnDayCompleted;
     public event Action<float> OnTimerUpdated;
 
-
+    public bool IsOvertime => isOvertime && !isDayCompleted;
+    public bool IsDayCompleted => isDayCompleted;
     public void InitializeDay()
     {
         currentTime = dayDuration;

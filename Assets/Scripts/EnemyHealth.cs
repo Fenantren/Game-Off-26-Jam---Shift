@@ -12,9 +12,15 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] GameObject heartUI;
     [SerializeField] bool isDead = false;
 
+    [Header("VFX and Money Prefab")]
     [SerializeField] GameObject explosionVFX;
     [SerializeField] GameObject moneyPrefab;
-    GameManager gameManager;
+
+    [Header("Money values")]
+    [SerializeField] private int normalMoneyValue;
+    [SerializeField] private float overtimeMultiplier;
+
+    private DayManager dayManager;
 
     private void Awake()
     {
@@ -27,33 +33,59 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     }
 
-    private void Start()
+    public void Initialize(DayManager dayManagerScript)
     {
-        gameManager = FindFirstObjectByType<GameManager>();
-        gameManager.AdjustEnemiesLeft(1);
+            
+
+        dayManager = dayManagerScript;
+        
+        Debug.Log(dayManager == null
+         ? "Enemy received NULL DayManager"
+         : "Enemy successfully received DayManager");
     }
-
-
+    
 
     public void TakeDamage (int damage)
     {
-        if (isDead) return;
-        
-            currentHP -= damage;
-            Destroy(heartBar.GetChild(0).gameObject);
+        if (isDead) 
+            return;
+        if(damage <=0) return;  
 
-            if(currentHP <=0)
+        currentHP -= damage;
+        Destroy(heartBar.GetChild(0).gameObject);
+
+        if(currentHP <=0)
+        {
+            isDead = true;
+            Instantiate(explosionVFX,transform.position,Quaternion.identity);
+            // SFX added here for death animations
+            int moneyAmount;
+
+            if (dayManager.IsOvertime)
             {
-                Instantiate(explosionVFX,transform.position,Quaternion.identity);
-                Instantiate(moneyPrefab,transform.position, Quaternion.identity);
-                isDead = true;
-                Debug.Log("is Dead");
-                gameManager.AdjustEnemiesLeft(-1);
-                //VFX + SFX added here for death animations
-            
-                Destroy(gameObject);
-
+                moneyAmount = Mathf.RoundToInt(normalMoneyValue * overtimeMultiplier);
             }
+            else moneyAmount = normalMoneyValue;
+
+            Debug.Log("Overtime: " + dayManager.IsOvertime);
+            Debug.Log("Money reward: " + moneyAmount);
+
+            GameObject money = Instantiate(moneyPrefab, transform.position, Quaternion.identity);
+            MoneyScript moneyScript = money.GetComponent<MoneyScript>();
+            if (moneyScript != null)
+            {
+                moneyScript.Initialize(moneyAmount);
+            }
+            else
+            {
+                Debug.LogError("Money prefab is missing MoneyScript!");
+            }
+
+            dayManager.RegisterEnemyDeath();
+            
+            Destroy(gameObject);
+
+        }
 
         
     }

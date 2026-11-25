@@ -151,5 +151,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6517b1fa66af33e478bacf203bfffb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoneyScript
-  valueAmount: 5
+  valueAmount: 0
   moveSpeed: 15

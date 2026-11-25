@@ -83,6 +83,8 @@ MonoBehaviour:
   isDead: 0
   explosionVFX: {fileID: 5143333957815489378, guid: 0659a4a862dbb5b4780f8aec7ddcf869, type: 3}
   moneyPrefab: {fileID: 253357358576956917, guid: 9cbcf7212884e3d49898ead736bf4bab, type: 3}
+  normalMoneyValue: 5
+  overtimeMultiplier: 2
 --- !u!114 &3821310858746310472
 MonoBehaviour:
   m_ObjectHideFlags: 0
